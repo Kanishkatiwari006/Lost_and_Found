@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        background: rgb(191, 184, 184);
+        width: 100%;
+      
+    }
+
+    header{
+        text-align: center;
+    }
+    
+    .navbar{
+        background-color: black;
+    }
+    ul{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navbar li{
+        float: left;
+        margin: 20px 25px;
+      
+    }
+    
+    .navbar li a{
+         padding: 3px 3px;
+         text-decoration: none;
+         color: white;
+    }
+    
+    .navbar li a:hover{
+        text-decoration: underline;
+        color: rgb(191, 184, 184);;
+    }
+    .al a{
+        float: right;
+        margin-right: -500px;
+        padding: 3px 25px;
+        text-decoration: none;
+        color: white;
+    }
+    
+    .al a:hover{
+        text-decoration: underline;
+        color: rgb(191, 184, 184);;
+    }
+    .al{
+        padding: 3px 3px;
+        justify-content: right;
+        text-align: right;
+        display: flex;
+        color:red;
+    }
+    .msgs{
+        color: red;
+        font-size: 20px;
+        margin-left: 550px;
+        text-align: left;
+    }
+    .center input{
+        display: block;
+            {% comment %} font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; {% endcomment %}
+            width: 400px;
+            padding: 10px;
+            border: 2px solid black;
+            margin: 20px auto;
+            font-size: 25px;
+            border-radius: 15px;
+    }
+    .center select{
+        display: block;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        width: 430px;
+        padding: 10px;
+        border: 2px solid black;
+        margin: 20px auto;
+        font-size: 20px;
+        border-radius: 15px;
+    }
+
+    .btn{
+        width: 100px;
+        text-align: center;
+        margin: 5px 5px;
+        padding: 10px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+
+    }
+    .btn:hover{
+        background-color: black;
+        color: white;
+
+    }
+    footer {
+        position : fixed;
+        padding-top: 5px;
+        background-color: #2c3e50;
+        color: #fff;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    footer p{
+        color: white;
+    }
+    .footer-links {
+        margin-top: 15px;
+    }
+    
+    .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+        color: #3498db;
+    }
+</style>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a class="active">Home</a></li>
+                <li><a href="/#how-it-works">About</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/after_login">Lost</a></li>
+                <div class="al">
+                <h4 >{{user.email}}</h4>
+                <a href="/logout">Logout</a>
+                <div>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Sign Up</a></li>
+                {% endif %}
+            </ul>
+    </nav>
+    </header>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="center">
+            <select name="options" id="options" onchange="showOtherInput()" >
+                <optgroup label="Please Select Item">
+                <option value="no">None is select</option>
+                <option value="purse">Purse</option>
+                <option value="Jwellery">Jwellery</option>
+                <option value="money">Money</option>
+                <option value="gold">Gold</option>
+                <option value="phone">Phone</option>
+                <option value="key">Key</option>
+                <option value="ear_phones">Ear Phones</option>
+                <option value="watch">Watch</option>
+                <option value="docs">Documents</option>
+                <option value="ring">Ring</option>
+                <option value="other">Others</option>
+            </optgroup>
+            </select>
+            <div class="center" id="otherInput">
+                <input type="text" id="other" name="ot" placeholder="Fill Others....">
+            </div>        
+        </div>
+        <div class="center">
+            <input type="text" name="place" placeholder="Address where you Found" required>
+        </div>
+        <div class="center">
+            <input type="number"  name="pin" placeholder="Pin Code where you Found" required>
+        </div>
+        <div class="center">
+            <input type="email"  name="em" placeholder="Provide your valid email" required>
+        </div>
+        <div class="center">
+            <input type="text"  name="ques" placeholder="Any Questions you want to ask?" required>
+        </div>
+        <div>
+            {% for msg in messages %}
+            <p class="msgs"> {{msg}} </p>
+            {%endfor%}
+            <button class="btn" type="submit" >Submit</button>
+        </div>
+       
+    </form>
+    <footer>
+        <p>&copy; 2024 Lost and Found. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="/#contact">Contact Us</a>
+        </div>
+    </footer> 
+</body>
+<script>
+    function showOtherInput() {
+        var selectBox = document.getElementById("options");
+        var otherInput = document.getElementById("otherInput");
+
+        if (selectBox.value === "other") {
+            otherInput.style.display = "block";
+        } else {
+            otherInput.style.display = "none";
+        }
+    }
+</script>
+</html>

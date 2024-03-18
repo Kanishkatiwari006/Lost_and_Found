@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>After Login</title>
+  <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'><link rel="stylesheet" href="style.css"> -->
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      background: rgb(191, 184, 184);
+    }
+
+    header{
+      text-align: center;
+      padding: 20px;
+  }
+
+  .navbar{
+      background-color: black;
+  }
+  ul{
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+  }
+
+  .navbar li{
+      float: left;
+      margin: 15px 20px;
+  }
+  .navbar{
+      overflow: auto;
+  }
+  .navbar li a{
+       padding: 3px 3px;
+       text-decoration: none;
+       color: white;
+  }
+  .navbar li a:hover{
+      text-decoration: underline;
+      color: rgb(191, 184, 184);;
+  }
+
+  .al a{
+    float: right;
+    margin-right: -500px;
+    padding: 3px 25px;
+    text-decoration: none;
+    color: white;
+}
+
+.al a:hover{
+    text-decoration: underline;
+    color: rgb(191, 184, 184);;
+}
+.al{
+    margin-top: 10px;
+    padding: 3px 3px;
+    justify-content: right;
+    text-align: right;
+    display: flex;
+    color:red;
+}
+    .cont {
+      overflow: hidden;
+      position: relative;
+      width: 900px;
+      height: 480px;
+      margin: 0 auto 50px;
+      margin-top: 50px;
+      background: gray;
+      border-radius: 25px;
+    }
+
+    .form {
+      position: relative;
+      width: 640px;
+      height: 90%;
+      transition: transform 1.2s ease-in-out;
+      padding: 50px 30px 0;
+    }
+
+    .sub-cont {
+      overflow: hidden;
+      position: absolute;
+      left: 640px;
+      top: 0;
+      width: 900px;
+      height: 100%;
+      padding-left: 260px;
+      background: gray;
+      transition: transform 1.2s ease-in-out;
+    }
+
+    .cont.s--signup .sub-cont {
+      transform: translate3d(-640px, 0, 0);
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      width: 260px;
+      height: 36px;
+      border-radius: 30px;
+      color: background;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .img {
+      overflow: hidden;
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 270px;
+      height: 100%;
+      padding-top: 360px;
+    }
+
+    .img:before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 950px;
+      height: 100%;
+      background-image: url("https://i.pinimg.com/originals/56/2b/cf/562bcf522c7ed464a93610f6957b158f.jpg");
+      background-size: cover;
+      transition: transform 1.2s ease-in-out;
+    }
+
+    .img:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .cont.s--signup .img:before {
+      transform: translate3d(640px, 0, 0);
+    }
+
+    .img__text {
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      top: 50px;
+      width: 100%;
+      padding: 0 20px;
+      text-align: center;
+      color: #fff;
+      transition: transform 1.2s ease-in-out;
+    }
+
+    .img__text h2 {
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+
+    .img__text p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .cont.s--signup .img__text.m--up {
+      transform: translateX(520px);
+    }
+
+    .img__text.m--in {
+      transform: translateX(-520px);
+    }
+
+    .cont.s--signup .img__text.m--in {
+      transform: translateX(0);
+    }
+
+    .img__btn {
+      overflow: hidden;
+      z-index: 2;
+      position: relative;
+      width: 100px;
+      height: 36px;
+      margin: 0 auto;
+      background: transparent;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .img__btn:after {
+      content: "";
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #fff;
+      border-radius: 30px;
+    }
+
+    .img__btn span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      transition: transform 1.2s;
+    }
+
+    .img__btn span.m--in {
+      transform: translateY(-72px);
+    }
+
+    .cont.s--signup .img__btn span.m--in {
+      transform: translateY(0);
+    }
+
+    .cont.s--signup .img__btn span.m--up {
+      transform: translateY(72px);
+    }
+
+    h2 {
+      width: 100%;
+      font-size: 26px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      width: 260px;
+      margin: 25px auto 0;
+      text-align: center;
+    }
+
+    label span {
+      font-size: 12px;
+      color: #cfcfcf;
+      text-transform: uppercase;
+    }
+    .forgot-pass {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #cfcfcf;
+    }
+
+    .submit {
+      margin-top: 200px;
+      margin-bottom: 20px;
+      background: black;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    .sign-in {
+      transition-timing-function: ease-out;
+    }
+
+    .cont.s--signup .sign-in {
+      transition-timing-function: ease-in-out;
+      transition-duration: 1.2s;
+      transform: translate3d(640px, 0, 0);
+    }
+
+   
+    footer {
+      position: fixed;
+      padding-top: 10px;
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      bottom: 0;
+      width: 100%;
+  }
+  
+  footer p{
+      color: white;
+  }
+  .footer-links {
+      margin-top: 10px;
+  }
+  
+  .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+      color: #3498db;
+  }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+    <ul>
+      <li><a class="active">Home</a></li>
+            <li><a href="/#how-it-works">About</a></li>
+            <li><a href="/#contact">Contact</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/after_login">Lost/Found</a></li>
+            <div class="al">
+            <h4 >{{user.email}}</h4>
+            <a href="/logout">Logout</a>
+            <div>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Sign Up</a></li>
+            {% endif %}
+    </ul>
+</nav>
+</header>
+  <div class="cont">
+    <form action="{% url 'Lost' %}" method="post">
+      {%csrf_token%}
+      <div class="form sign-in">
+        <button type="lg" class="submit" onclick="Lost()">Lost Something</button>
+      </div>
+    </form>
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img__text m--up">
+          <h2>Found?</h2>
+          <p> If you found something , you want to return</p>
+        </div>
+        <div class="img__text m--in">
+          <h2>Lost?</h2>
+          <p>If you lost something, you want to find it</p>
+        </div>
+        <div class="img__btn">
+          <span class="m--up">Found</span>
+          <span class="m--in">Lost</span>
+        </div>
+      </div>
+      <form action="{% url 'after_found' %}" method="">
+        <div class="form sign-up">
+          <button type="Submit" class="submit">Found</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.querySelector('.img__btn').addEventListener('click', function () {
+      document.querySelector('.cont').classList.toggle('s--signup');
+    });
+
+   
+  </script>
+</body>
+<footer>
+  <p>&copy; 2024 Lost and Found. All rights reserved.</p>
+  <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="/#contact">Contact Us</a>
+  </div>
+</footer> 
+
+</html>
